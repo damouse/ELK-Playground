@@ -1,0 +1,14 @@
+output:
+  logstash:
+    enabled: true
+    hosts:
+      - localhost:5044
+    ssl:
+      certificate_authorities:
+        - /etc/pki/tls/certs/logstash-beats.crt
+    timeout: 15
+
+filebeat.inputs:
+- type: log 
+  paths:
+    - /home/damouse/code/infra/elk/log.txt
