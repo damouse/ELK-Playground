@@ -1,9 +1,8 @@
 
 version: "2"
 services:
-
-
   elk:
+    network_mode: host
     build:
       context: .
     ports:
@@ -12,8 +11,10 @@ services:
       - "5044:5044"
 
   fbeat:
+    network_mode: host
     build:
-      context: filebeat
+      # context: filebeat
+      context: nginx-filebeat
     volumes:
       - ./log.txt:/var/log/nginx/access.log
 
