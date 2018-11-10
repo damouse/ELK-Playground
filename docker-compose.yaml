@@ -18,3 +18,5 @@ services:
     volumes:
       - ./log.txt:/var/log/nginx/access.log
 
+  
+
