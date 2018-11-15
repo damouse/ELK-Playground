@@ -29,7 +29,6 @@ services:
       - "5000:5000"
       - "9600:9600"
     environment:
-      # LS_JAVA_OPTS: "-Xmx256m -Xms256m"
       - LOGSPOUT=ignore
     networks:
       - elk
@@ -52,6 +51,21 @@ services:
       - elasticsearch
     environment:
       - LOGSPOUT=ignore
+
+  logspout:
+    build:
+      context: logspout/
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ROUTE_URIS: udp://logstash:5000
+      LOGSTASH_TAGS: docker-elk
+      LOGSPOUT: ignore
+    networks:
+      - elk
+    depends_on:
+      - logstash
+    restart: on-failure
 
 networks:
   elk:
