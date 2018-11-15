@@ -25,9 +25,12 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    expose:
+      - "5000"
     ports:
       - "5000:5000"
       - "9600:9600"
+      - "5000:5000/udp"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
@@ -51,6 +54,5 @@ services:
       - elasticsearch
 
 networks:
-
   elk:
     driver: bridge

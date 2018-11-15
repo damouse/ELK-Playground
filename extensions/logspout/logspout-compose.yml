@@ -1,5 +1,4 @@
 version: '2'
-
 services:
   logspout:
     build:
@@ -7,10 +6,29 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      ROUTE_URIS: logstash://logstash:5000
+      ROUTE_URIS: udp://logstash:5000
       LOGSTASH_TAGS: docker-elk
+      LOGSPOUT: ignore
     networks:
       - elk
     depends_on:
       - logstash
     restart: on-failure
+
+
+#   logspout:
+#     build:
+#       # context: extensions/logspout
+#       context: .
+#     volumes:
+#       - /var/run/docker.sock:/var/run/docker.sock:ro
+#     environment:
+#       ROUTE_URIS: udp://localhost:5000
+#       LOGSTASH_TAGS: docker-elk
+#     # networks:
+#       # - elk
+#     network_mode: host
+#     # depends_on:
+#       # - logstash
+#     # restart: on-f ailure
+
