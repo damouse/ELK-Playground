@@ -1,9 +1,19 @@
-# Testing ELK+Logtrain
+# Testing ELK
 
-This is the default ELK stack build [here](https://github.com/deviantony/docker-elk) with Logtrail added and configured for syslog output. 
+Testing configuration and behavior of an ELK stack. Built from a default ELK stack found [here](https://github.com/deviantony/docker-elk). 
 
-The only changes from the defaults was to change logstash.conf to point to `elasticsearch:9000` instead of `localhost` and to add `*.* @@localhost:5000
-` to `/etc/rsyslog.conf`. Logs arrive at Elasticsearch and show up in the Discover page under `logstash-*` but dont show up in papertrail.
+Requirements:
+- Ingest logs from dockerized application stacks running a range of languages on physical platforms over cell
+- Use S3 as a backend
+- Run entirely containerized
 
+Extensions currently active:
+- `logtrail`
+- `logspout`
 
+Start the stack with `docker-compose up`. Test with:
+
+```
+docker run --rm alpine echo This is my log message
+```
 
