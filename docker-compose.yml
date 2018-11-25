@@ -27,6 +27,7 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
+      # - "5000:5000/udp"
       - "9600:9600"
     environment:
       - LOGSPOUT=ignore
@@ -52,20 +53,21 @@ services:
     environment:
       - LOGSPOUT=ignore
 
-  logspout:
-    build:
-      context: logspout/
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      ROUTE_URIS: udp://logstash:5000
-      LOGSTASH_TAGS: docker-elk
-      LOGSPOUT: ignore
-    networks:
-      - elk
-    depends_on:
-      - logstash
-    restart: on-failure
+  # # Isolated out 
+  # logspout:
+  #   build:
+  #     context: logspout/
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   environment:
+  #     ROUTE_URIS: tcp://logstash:5000
+  #     LOGSTASH_TAGS: docker-elk
+  #     LOGSPOUT: ignore
+  #   networks:
+  #     - elk
+  #   depends_on:
+  #     - logstash
+  #   restart: on-failure
 
 networks:
   elk:

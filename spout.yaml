@@ -1,0 +1,13 @@
+version: '2'
+services:
+  logspout:
+    build:
+      context: logspout/
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ROUTE_URIS: tcp://localhost:5000
+      LOGSTASH_TAGS: docker-elk
+      LOGSPOUT: ignore
+    network_mode: host
+    restart: always
