@@ -5,9 +5,13 @@ services:
       context: logspout/
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/ssl/certs/localhost.crt:/opt/self/nginx.crt
     environment:
-      ROUTE_URIS: tcp://localhost:5000
+      ROUTE_URIS: tls://0.0.0.0:12345
       LOGSTASH_TAGS: docker-elk
       LOGSPOUT: ignore
+      LOGSPOUT_TLS_CA_CERTS: /opt/self/nginx.crt
+      # LOGSPOUT_TLS_CLIENT_CERT: /opt/client.crt
+      # LOGSPOUT_TLS_CLIENT_KEY: 
     network_mode: host
     restart: always
