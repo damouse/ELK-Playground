@@ -21,10 +21,12 @@ docker run --rm alpine echo This is my log message
 
 ## TODO
 
-- Figure out long term security from devices and clients
-- Get mobile input
+- Logspout grokking
+- Client auth 
+- User auth
+- Long-term storage solution
+- Mobile logs input
 - Test rate-limiting
-- Authenticate with Kibana
 
 ## Notes
 
@@ -36,3 +38,6 @@ The curator plugin shipped with this repo might rotate indicies in the way I nee
 
 [This site](https://elk-docker.readthedocs.io/) may help with security.
 
+[Simple tutorial](http://www.inanzzz.com/index.php/post/en5u/adding-ssl-security-to-log-forwarding-from-filebeat-to-elasticsearch-logstash-kibana-elk-stack-and-filebeat-on-ubuntu-14-04) for logstash certificate auth.
+
+Could also experiment with client TLS auth via [nginx reverse proxy](https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/), but that may not be flexible enough for all kinds of ELK plugins.
