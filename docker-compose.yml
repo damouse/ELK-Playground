@@ -27,7 +27,6 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
-      # - "5000:5000/udp"
       - "9600:9600"
     environment:
       - LOGSPOUT=ignore
@@ -53,7 +52,7 @@ services:
     environment:
       - LOGSPOUT=ignore
 
-  # # Isolated out 
+  # Moved to its own compose file
   # logspout:
   #   build:
   #     context: logspout/
