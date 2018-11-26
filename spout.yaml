@@ -23,12 +23,13 @@ services:
       LOGSPOUT: ignore
 
       # Local testing without autl
-      ROUTE_URIS: tcp://0.0.0.0:5000
+      ROUTE_URIS: logstash+tcp://0.0.0.0:5000
 
       # TLS nginx reverse proxy auth
       # ROUTE_URIS: tls://0.0.0.0:12345
       # LOGSPOUT_TLS_CA_CERTS: /opt/self/nginx.crt
       # LOGSPOUT_TLS_CLIENT_CERT: //opt/self/client.crt
       # LOGSPOUT_TLS_CLIENT_KEY: /opt/self/client.key
+      DOCKER_LABELS: 1
     network_mode: host
     restart: always

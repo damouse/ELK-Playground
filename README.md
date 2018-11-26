@@ -50,6 +50,8 @@ The curator plugin shipped with this repo might rotate indicies in the way I nee
 
 Could also experiment with client TLS auth via [nginx reverse proxy](https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/), but that may not be flexible enough for all kinds of ELK plugins.
 
+Logspout is great and all, but filebeat might just be better. It [can handle raw json files](https://www.elastic.co/blog/structured-logging-filebeat) on its own, which means I don't have to muck about with an adapter. I suspect its more robust to network issues. Downsides are anything that logs needs to know JSON, so ROS and javascript projects won't work out of the box.
+
 ## Nginx and Client Auth
 
 My plan right now is to let nginx handle authentication via client certificate certificate and a reverse TCP proxy to logstash. A working sample `nginx.conf` is checked into source here, as well as an openssl config for testing with self-signed certs locally.
@@ -66,3 +68,4 @@ sudo cp localhost.key /etc/ssl/private/localhost.key
 These are set up for testing with a local, undockerized nginx. I should have containerized it from the start, sorry!
 
 `spout.yaml` contains volume mappings for the client's cert and key and nginx tries to load the signing CA. These files are not present here. 
+
