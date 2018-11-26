@@ -13,7 +13,13 @@ Extensions currently active:
 - `logtrail`
 - `logspout`
 
-Start the stack with `docker-compose up`. Test with:
+## Setup 
+
+This branch is set up to use nginx as a reverse proxy to terminate TLS and to perform client authentication. The full docs for setting this up are not recorded here.
+
+Start the stack with `docker-compose up`. Start logspout with `docker-compose -f spout.yaml up`. 
+
+Test with:
 
 ```
 docker run --rm alpine echo This is my log message
@@ -41,3 +47,7 @@ The curator plugin shipped with this repo might rotate indicies in the way I nee
 [Simple tutorial](http://www.inanzzz.com/index.php/post/en5u/adding-ssl-security-to-log-forwarding-from-filebeat-to-elasticsearch-logstash-kibana-elk-stack-and-filebeat-on-ubuntu-14-04) for logstash certificate auth.
 
 Could also experiment with client TLS auth via [nginx reverse proxy](https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/), but that may not be flexible enough for all kinds of ELK plugins.
+
+## Notes
+
+The current logspout config works with 

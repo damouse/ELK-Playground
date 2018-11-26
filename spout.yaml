@@ -6,12 +6,18 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/ssl/certs/localhost.crt:/opt/self/nginx.crt
+
+      # CA cert, client cert, client key
+      - /home/damouse/.lhr/data/ca.crt:/opt/self/ca.crt
+      - /home/damouse/.lhr/data/client.crt:/opt/self/client.crt
+      - /home/damouse/.lhr/data/client.key:/opt/self/client.key
+
     environment:
       ROUTE_URIS: tls://0.0.0.0:12345
       LOGSTASH_TAGS: docker-elk
       LOGSPOUT: ignore
       LOGSPOUT_TLS_CA_CERTS: /opt/self/nginx.crt
-      # LOGSPOUT_TLS_CLIENT_CERT: /opt/client.crt
-      # LOGSPOUT_TLS_CLIENT_KEY: 
+      LOGSPOUT_TLS_CLIENT_CERT: //opt/self/client.crt
+      LOGSPOUT_TLS_CLIENT_KEY: /opt/self/client.key
     network_mode: host
     restart: always
