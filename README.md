@@ -28,11 +28,13 @@ docker run --rm alpine echo This is my log message
 ## TODO
 
 - Logspout grokking
-- Client auth 
-- User auth
+- Kibana user authentication
 - Long-term storage solution
 - Mobile logs input
 - Test rate-limiting
+
+Probably done:
+- Client auth (TLS termination with client cert checking)
 
 ## Notes
 
@@ -48,6 +50,19 @@ The curator plugin shipped with this repo might rotate indicies in the way I nee
 
 Could also experiment with client TLS auth via [nginx reverse proxy](https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/), but that may not be flexible enough for all kinds of ELK plugins.
 
-## Notes
+## Nginx and Client Auth
 
-The current logspout config works with 
+My plan right now is to let nginx handle authentication via client certificate certificate and a reverse TCP proxy to logstash. A working sample `nginx.conf` is checked into source here, as well as an openssl config for testing with self-signed certs locally.
+
+```
+cd nginx
+
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt -config localhost.conf
+
+sudo cp localhost.crt /etc/ssl/certs/localhost.crt
+sudo cp localhost.key /etc/ssl/private/localhost.key
+```
+
+These are set up for testing with a local, undockerized nginx. I should have containerized it from the start, sorry!
+
+`spout.yaml` contains volume mappings for the client's cert and key and nginx tries to load the signing CA. These files are not present here. 

@@ -12,6 +12,10 @@ services:
       - /home/damouse/.lhr/data/client.crt:/opt/self/client.crt
       - /home/damouse/.lhr/data/client.key:/opt/self/client.key
 
+      # Testing bad keys
+      # - /home/damouse/code/infra/scratch/localhost.crt:/opt/self/client.crt
+      # - /home/damouse/code/infra/scratch/localhost.key:/opt/self/client.key
+
     environment:
       ROUTE_URIS: tls://0.0.0.0:12345
       LOGSTASH_TAGS: docker-elk
