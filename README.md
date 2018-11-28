@@ -52,6 +52,8 @@ Could also experiment with client TLS auth via [nginx reverse proxy](https://far
 
 Logspout is great and all, but filebeat might just be better. It [can handle raw json files](https://www.elastic.co/blog/structured-logging-filebeat) on its own, which means I don't have to muck about with an adapter. I suspect its more robust to network issues. Downsides are anything that logs needs to know JSON, so ROS and javascript projects won't work out of the box.
 
+Probably need a custom template [for filebeat](https://discuss.elastic.co/t/custom-filebeat-template-for-json-log-lines/114761/7).
+
 ## Nginx and Client Auth
 
 My plan right now is to let nginx handle authentication via client certificate certificate and a reverse TCP proxy to logstash. A working sample `nginx.conf` is checked into source here, as well as an openssl config for testing with self-signed certs locally.

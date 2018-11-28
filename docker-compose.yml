@@ -5,8 +5,6 @@ services:
   elasticsearch:
     build:
       context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -20,8 +18,6 @@ services:
   logstash:
     build:
       context: logstash/
-      args:
-        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -38,8 +34,6 @@ services:
   kibana:
     build:
       context: kibana/
-      args:
-        ELK_VERSION: $ELK_VERSION
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
       - ./logtrail.json:/usr/share/kibana/plugins/logtrail/logtrail.json
@@ -51,22 +45,6 @@ services:
       - elasticsearch
     environment:
       - LOGSPOUT=ignore
-
-  # Moved to its own compose file
-  # logspout:
-  #   build:
-  #     context: logspout/
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #   environment:
-  #     ROUTE_URIS: tcp://logstash:5000
-  #     LOGSTASH_TAGS: docker-elk
-  #     LOGSPOUT: ignore
-  #   networks:
-  #     - elk
-  #   depends_on:
-  #     - logstash
-  #   restart: on-failure
 
 networks:
   elk:

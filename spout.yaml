@@ -33,3 +33,11 @@ services:
       DOCKER_LABELS: 1
     network_mode: host
     restart: always
+
+  filebeat:
+    network_mode: host
+    build:
+      context: filebeat
+    volumes:
+      - ./filebeat/sample_log.json:/logs/sample_log.json
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml

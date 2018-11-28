@@ -1,0 +1,55 @@
+# output:
+#   logstash:
+#     enabled: true
+#     hosts:
+#       - localhost:5044
+#     timeout: 15
+#     ssl:
+#       certificate_authorities:
+#       - /etc/pki/tls/certs/logstash-beats.crt
+
+# filebeat:
+#   prospectors:
+#     -
+#       paths:
+#         - /var/log/syslog
+#         - /var/log/auth.log
+#       document_type: syslog
+#     -
+#       paths:
+#         - "/var/log/nginx/*.log"
+#       document_type: nginx-access
+
+# filebeat.prospectors:
+# - input_type: log
+#   paths:
+#     - /var/log/*.log
+#   input_type: log
+#   document_type: syslog
+#   registry: /var/lib/filebeat/registry
+
+# output.elasticsearch:
+#   hosts: ["http://0.0.0.0:5000"]
+#   protocol: "http"
+#   # username: "ec18487808b87359124d3"
+#   # password: "wetihnsdt453"
+
+filebeat.prospectors:
+- input_type: log
+  paths: ["/logs/*"]
+  scan_frequency: 1s
+  json.message_key: event
+  # json.keys_under_root: true
+  fields:
+    planet: Magrathea
+    service: MyService
+  tags: [
+    "i",
+    "heart",
+    "json"
+  ]
+
+output.elasticsearch:
+  hosts: ["0.0.0.0:9200"]
+  template.name: filebeat
+  template.path: filebeat.template.json
