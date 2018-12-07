@@ -34,23 +34,36 @@
 #   # username: "ec18487808b87359124d3"
 #   # password: "wetihnsdt453"
 
+setup.template.name: "memplate"
+setup.template.fields: "/usr/share/filebeat/fields.yml"
+setup.template.name: "customname"
+setup.template.pattern: "customname-*"
+
 filebeat.prospectors:
 - input_type: log
   paths: ["/logs/*"]
   scan_frequency: 1s
-  json.message_key: event
-  # json.keys_under_root: true
-  fields:
-    planet: Magrathea
-    service: MyService
+  # json.message_key: event
+  json.keys_under_root: true
+  document_type: json
+
+  # Start at the end of the file, not at the top.
+  # tail_files: true
+
+  # fields:
+  #   type: custom_json
+  #   codec: json
+  # fields:
+    # planet: Magrathea
+    # service: MyService
     # Might allow for device type and serial number to be inferred easily if we can get it into the env
     # What other things are we interested in?
     # service: ${SERVICE_NAME}
-  tags: [
-    "i",
-    "heart",
-    "json"
-  ]
+  # tags: [
+  #   "i",
+  #   "heart",
+  #   "json"
+  # ]
 
 output.elasticsearch:
   hosts: ["0.0.0.0:9200"]

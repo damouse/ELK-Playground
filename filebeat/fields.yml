@@ -1,21 +1,22 @@
-# Sample taken from some ELK help forum answer. Probably a decent place to start. 
+# Sample taken from some ELK help forum answer. Probably a decent place to start.
+# See: https://discuss.elastic.co/t/custom-filebeat-template-for-json-log-lines/114761
 - key: log
   title: Log file content
   description: >
     Contains log file lines.
   fields:
-    - name: log.source
-      type: keyword
-      required: true
-      description: >
-        The file from which the line was read. This field contains the absolute path to the file.
-        For example: `/var/log/system.log`.
+    # - name: log.source
+    #   type: keyword
+    #   required: true
+    #   description: >
+    #     The file from which the line was read. This field contains the absolute path to the file.
+    #     For example: `/var/log/system.log`.
 
-    - name: log.offset
+    - name: log.time
       type: long
       required: false
       description: >
-        The file offset the reported line starts at.
+        The timestamp
 
     - name: log.message
       type: text
@@ -24,13 +25,19 @@
       description: >
         The content of the line read from the log file.
       fields:
-        - name: destination-ip
-          type: ip
-          required: false
-          description: >
-            IP address
-    - name: destination-ip
-      type: ip
-      required: false
-      description: >
-           IP address
+        # - name: destination-ip
+        #   type: ip
+        #   required: false
+        #   description: >
+        #     IP address
+
+        - name: project
+          type: keyword
+          required: true
+          description: The project that generated this log
+
+    # - name: destination-ip
+    #   type: ip
+    #   required: false
+    #   description: >
+    #        IP address

@@ -17,12 +17,12 @@ Extensions currently active:
 
 This branch is set up to use nginx as a reverse proxy to terminate TLS and to perform client authentication. The full docs for setting this up are not recorded here.
 
-Start the stack with `docker-compose up`. Start logspout with `docker-compose -f spout.yaml up`. 
+Start the stack with `docker-compose up`. Start filebeat with `docker-compose -f spout.yaml up filebeat`. 
 
 Test with:
 
 ```
-docker run --rm alpine echo This is my log message
+echo '{"level": 1, "message": "this is my message", "project": "gps", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}' >> filebeat/sample_log.json 
 ```
 
 ## TODO
@@ -71,3 +71,11 @@ These are set up for testing with a local, undockerized nginx. I should have con
 
 `spout.yaml` contains volume mappings for the client's cert and key and nginx tries to load the signing CA. These files are not present here. 
 
+## Filebeat
+
+Export template:
+
+```
+docker-compose -f spout.yaml run filebeat bash
+filebeat -strict.perms=false -c /usr/share/filebeat/filebeat.yml export template > filebeat.template.json
+```

@@ -1,18 +1,4 @@
-{"verified": false, "user": "arthur", "session_id": "91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "SHEMAY", "session_id": "91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
-{"verified": false, "user": "poobear", "session_id": "NARWHAL91e5b9d", "id": 42, "event": "logged_in"}
+{"level": 1, "message": "this is my message", "project": "gps", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}
+{"level": 1, "message": "this is my message", "project": "gps", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}
+{"level": 1, "message": "this is my message", "project": "gps", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}
+{"level": 1, "message": "this is my message", "project": "roc-client", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}
