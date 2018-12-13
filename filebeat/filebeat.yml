@@ -53,12 +53,12 @@ filebeat.prospectors:
   # fields:
   #   type: custom_json
   #   codec: json
-  # fields:
+  fields:
     # planet: Magrathea
     # service: MyService
     # Might allow for device type and serial number to be inferred easily if we can get it into the env
     # What other things are we interested in?
-    # service: ${SERVICE_NAME}
+    serial: ${SERIAL}
   # tags: [
   #   "i",
   #   "heart",

@@ -27,14 +27,20 @@ echo '{"level": 1, "message": "this is my message", "project": "gps", "device": 
 
 ## TODO
 
-- Logspout grokking
-- Kibana user authentication
+Minimal set:
+
+- Index template, formatting
+- Environment variable compose
+
+Future work:
+
 - Long-term storage solution
 - Mobile logs input
-- Test rate-limiting
+- Rate-limiting
 
 Probably done:
 - Client auth (TLS termination with client cert checking)
+- Kibana auth
 
 ## Notes
 
@@ -79,3 +85,16 @@ Export template:
 docker-compose -f spout.yaml run filebeat bash
 filebeat -strict.perms=false -c /usr/share/filebeat/filebeat.yml export template > filebeat.template.json
 ```
+
+Direct message fields:
+
+- `timestamp`: device time
+- `level`: int from 0-5
+- `project`
+- `message`
+
+Environmental fields
+- `application`
+- `id`: serial for devices, email for non-devices
+- `project_version`
+- `app_version`

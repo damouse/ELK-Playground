@@ -1,38 +1,38 @@
 version: '2'
 services:
-  logspout:
-    build:
-      context: logspout/
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+  # logspout:
+  #   build:
+  #     context: logspout/
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
 
-      # Self signed cert for local nginx testing
-      # - /etc/ssl/certs/localhost.crt:/opt/self/nginx.crt
+  #     # Self signed cert for local nginx testing
+  #     # - /etc/ssl/certs/localhost.crt:/opt/self/nginx.crt
 
-      # CA cert, client cert, client key
-      # - /home/damouse/.lhr/data/ca.crt:/opt/self/ca.crt
-      # - /home/damouse/.lhr/data/client.crt:/opt/self/client.crt
-      # - /home/damouse/.lhr/data/client.key:/opt/self/client.key
+  #     # CA cert, client cert, client key
+  #     # - /home/damouse/.lhr/data/ca.crt:/opt/self/ca.crt
+  #     # - /home/damouse/.lhr/data/client.crt:/opt/self/client.crt
+  #     # - /home/damouse/.lhr/data/client.key:/opt/self/client.key
 
-      # Testing bad keys
-      # - /home/damouse/code/infra/scratch/localhost.crt:/opt/self/client.crt
-      # - /home/damouse/code/infra/scratch/localhost.key:/opt/self/client.key
+  #     # Testing bad keys
+  #     # - /home/damouse/code/infra/scratch/localhost.crt:/opt/self/client.crt
+  #     # - /home/damouse/code/infra/scratch/localhost.key:/opt/self/client.key
 
-    environment:
-      LOGSTASH_TAGS: docker-elk
-      LOGSPOUT: ignore
+  #   environment:
+  #     LOGSTASH_TAGS: docker-elk
+  #     LOGSPOUT: ignore
 
-      # Local testing without autl
-      ROUTE_URIS: logstash+tcp://0.0.0.0:5000
+  #     # Local testing without autl
+  #     ROUTE_URIS: logstash+tcp://0.0.0.0:5000
 
-      # TLS nginx reverse proxy auth
-      # ROUTE_URIS: tls://0.0.0.0:12345
-      # LOGSPOUT_TLS_CA_CERTS: /opt/self/nginx.crt
-      # LOGSPOUT_TLS_CLIENT_CERT: //opt/self/client.crt
-      # LOGSPOUT_TLS_CLIENT_KEY: /opt/self/client.key
-      DOCKER_LABELS: 1
-    network_mode: host
-    restart: always
+  #     # TLS nginx reverse proxy auth
+  #     # ROUTE_URIS: tls://0.0.0.0:12345
+  #     # LOGSPOUT_TLS_CA_CERTS: /opt/self/nginx.crt
+  #     # LOGSPOUT_TLS_CLIENT_CERT: //opt/self/client.crt
+  #     # LOGSPOUT_TLS_CLIENT_KEY: /opt/self/client.key
+  #     DOCKER_LABELS: 1
+  #   network_mode: host
+  #   restart: always
 
   filebeat:
     network_mode: host
@@ -41,3 +41,9 @@ services:
     volumes:
       - ./filebeat/sample_log.json:/logs/sample_log.json
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+
+    # Pulled in from .env file present in the same directory as the compose file, but you can also 
+    # just reference existing environment variables, too. 
+    # Do this with: device type, serial. Can't do anything about source, though
+    environment:
+      - LHR_SERIAL=${LHR_SERIAL}
