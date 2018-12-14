@@ -41,9 +41,11 @@ services:
     volumes:
       - ./filebeat/sample_log.json:/logs/sample_log.json
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./filebeat/template.yml:/usr/share/filebeat/template.yml
 
-    # Pulled in from .env file present in the same directory as the compose file, but you can also 
-    # just reference existing environment variables, too. 
-    # Do this with: device type, serial. Can't do anything about source, though
+    # Pulled in from .env file present in the same directory as the compose file, but intended use is for 
+    # vanilla environment variables
     environment:
-      - LHR_SERIAL=${LHR_SERIAL}
+      - LHR_ID=${LHR_ID}
+      - LHR_APP=${LHR_APP}
+      - LHR_APP_VERSION=${LHR_APP_VERSION}

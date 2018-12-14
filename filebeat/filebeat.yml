@@ -1,3 +1,36 @@
+setup.template.name: "memplate"
+setup.template.fields: "/usr/share/filebeat/template.yml"
+setup.template.pattern: "testerbester"
+
+filebeat.prospectors:
+- input_type: log
+  paths: ["/logs/*"]
+  scan_frequency: 1s
+  document_type: json
+  fields_under_root: true
+  json.keys_under_root: true
+
+  # Start at the end of the file, not at the top.
+  # tail_files: true
+  fields:
+    app: ${LHR_APP}
+    id: ${LHR_ID}
+    app_version: ${LHR_APP_VERSION}
+
+# output.elasticsearch:
+#   # Maybe we should use different indicies for each application type? Need to look at the performance consequences 
+#   index: 'testerbester'
+#   hosts: ["0.0.0.0:9200"]
+#   template.name: template
+#   template.path: template.template.json
+
+output:
+  logstash:
+    enabled: true
+    hosts:
+      - 0.0.0.0:5044
+    timeout: 15
+
 # output:
 #   logstash:
 #     enabled: true
@@ -33,39 +66,3 @@
 #   protocol: "http"
 #   # username: "ec18487808b87359124d3"
 #   # password: "wetihnsdt453"
-
-setup.template.name: "memplate"
-setup.template.fields: "/usr/share/filebeat/fields.yml"
-setup.template.name: "customname"
-setup.template.pattern: "customname-*"
-
-filebeat.prospectors:
-- input_type: log
-  paths: ["/logs/*"]
-  scan_frequency: 1s
-  # json.message_key: event
-  json.keys_under_root: true
-  document_type: json
-
-  # Start at the end of the file, not at the top.
-  # tail_files: true
-
-  # fields:
-  #   type: custom_json
-  #   codec: json
-  fields:
-    # planet: Magrathea
-    # service: MyService
-    # Might allow for device type and serial number to be inferred easily if we can get it into the env
-    # What other things are we interested in?
-    serial: ${SERIAL}
-  # tags: [
-  #   "i",
-  #   "heart",
-  #   "json"
-  # ]
-
-output.elasticsearch:
-  hosts: ["0.0.0.0:9200"]
-  template.name: filebeat
-  template.path: filebeat.template.json

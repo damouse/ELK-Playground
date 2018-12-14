@@ -22,7 +22,8 @@ Start the stack with `docker-compose up`. Start filebeat with `docker-compose -f
 Test with:
 
 ```
-echo '{"level": 1, "message": "this is my message", "project": "gps", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}' >> filebeat/sample_log.json 
+echo '{"level": 4, "message": "this is my message", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
+' >> filebeat/sample_log.json 
 ```
 
 ## TODO
@@ -92,9 +93,9 @@ Direct message fields:
 - `level`: int from 0-5
 - `project`
 - `message`
+- `project_version`
 
 Environmental fields
 - `application`
 - `id`: serial for devices, email for non-devices
-- `project_version`
 - `app_version`

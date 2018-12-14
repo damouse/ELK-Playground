@@ -2,7 +2,7 @@
   "index_patterns" : [
     {      
       "es": {
-        "default_index": "logstash-spouty",
+        "default_index": "logstash-jsony",
         "allow_url_parameter": false
       },
       "tail_interval_in_seconds": 3,
@@ -17,11 +17,19 @@
         "mapping" : {
             "timestamp" : "@timestamp",
             "display_timestamp" : "@timestamp",
-            "hostname" : "host",
-            "program": "host",
             "message": "message"
         },
-        "message_format": "{{{message}}}"
+        "message_format": "[{{{app}}} {{{id}}} {{{project}}}] {{level}}: {{{message}}}"
+      },
+      "color_mapping" : {
+        "field": "level",
+        "mapping" : {
+          "V": "#808080",
+          "D": "#0056ac",
+          "I": "#ffffff",
+          "W": "#f4cb00",
+          "E": "#e30000"
+        }
       }
     }  
   ]

@@ -1,5 +1,11 @@
 # Sample taken from some ELK help forum answer. Probably a decent place to start.
 # See: https://discuss.elastic.co/t/custom-filebeat-template-for-json-log-lines/114761
+# - key: time
+#   type: long
+#   required: false
+#   description: >
+#     The timestamp
+
 - key: log
   title: Log file content
   description: >
@@ -31,13 +37,24 @@
         #   description: >
         #     IP address
 
-        - name: project
-          type: keyword
-          required: true
-          description: The project that generated this log
+        # - name: project
+        #   type: keyword
+        #   required: true
+        #   description: The project that generated this log
 
     # - name: destination-ip
     #   type: ip
     #   required: false
     #   description: >
     #        IP address
+
+    # "created":  {
+    #   "type":   "date", 
+    #   "format": "strict_date_optional_time||epoch_millis"
+    # }
+
+# - key: beat
+#   title: Beat
+#   description: >
+#     Contains common beat fields available in all event types.
+#   fields: []

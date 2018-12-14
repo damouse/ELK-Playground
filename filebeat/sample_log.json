@@ -1,1 +1,5 @@
-{"level": 1, "message": "this is my message", "project": "gps", "device": "snwobot", "serial": "aacb72", "time": 1544205586.950155}
+{"level": "V", "message": "verbose", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
+{"level": "D", "message": "debug", "project": "gps", "project_version": "1.2.3", "time": 1544205520}
+{"level": "I", "message": "info", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
+{"level": "W", "message": "warning", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
+{"level": "E", "message": "error", "project": "gps", "project_version": "1.2.3", "time": 1544743999}

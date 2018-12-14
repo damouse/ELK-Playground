@@ -28,8 +28,11 @@ FROM damouse/python-common:amd64
 COPY --from=0 /go/bin/filebeat /usr/bin/filebeat
 
 COPY filebeat.yml /usr/share/filebeat/filebeat.yml
-COPY fields.yml /usr/share/filebeat/fields.yml
+COPY template.yml /usr/share/filebeat/template.yml
 
 RUN mkdir /logs
 
 CMD filebeat -strict.perms=false -e -c /usr/share/filebeat/filebeat.yml
+
+# Export with:
+# filebeat -strict.perms=false export template > filebeat.template.json
