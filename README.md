@@ -30,8 +30,8 @@ echo '{"level": 4, "message": "this is my message", "project": "gps", "project_v
 
 Minimal set:
 
-- Index template, formatting
-- Environment variable compose
+- EBS volume
+- User and Device auth recheck
 
 Future work:
 
