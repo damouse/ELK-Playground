@@ -3,3 +3,5 @@
 {"level": "I", "message": "info", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
 {"level": "W", "message": "warning", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
 {"level": "E", "message": "error", "project": "gps", "project_version": "1.2.3", "time": 1544743999}
+{"level": 4, "message": "this is my message", "project": "gps", "project_version": "1.2.3", "time": 1544205586}
+

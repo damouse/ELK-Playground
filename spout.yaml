@@ -1,5 +1,26 @@
 version: '2'
 services:
+  filebeat:
+    network_mode: host
+    build:
+      context: filebeat
+    volumes:
+      - ./filebeat/sample_log.json:/logs/sample_log.json
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./filebeat/template.yml:/usr/share/filebeat/template.yml
+
+      # Local auth testing. These are required for production, except for the last one.
+      - ./filebeat/client.crt:/etc/client.crt
+      - ./filebeat/client.key:/etc/client.key
+      - ./filebeat/server.crt:/etc/server.crt
+
+    # Pulled in from .env file present in the same directory as the compose file, but intended use is for 
+    # vanilla environment variables
+    environment:
+      - LHR_ID=${LHR_ID}
+      - LHR_APP=${LHR_APP}
+      - LHR_APP_VERSION=${LHR_APP_VERSION}
+
   # logspout:
   #   build:
   #     context: logspout/
@@ -33,19 +54,3 @@ services:
   #     DOCKER_LABELS: 1
   #   network_mode: host
   #   restart: always
-
-  filebeat:
-    network_mode: host
-    build:
-      context: filebeat
-    volumes:
-      - ./filebeat/sample_log.json:/logs/sample_log.json
-      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - ./filebeat/template.yml:/usr/share/filebeat/template.yml
-
-    # Pulled in from .env file present in the same directory as the compose file, but intended use is for 
-    # vanilla environment variables
-    environment:
-      - LHR_ID=${LHR_ID}
-      - LHR_APP=${LHR_APP}
-      - LHR_APP_VERSION=${LHR_APP_VERSION}

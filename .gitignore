@@ -1,0 +1,3 @@
+filebeat/client.crt
+filebeat/client.key
+filebeat/server.crt

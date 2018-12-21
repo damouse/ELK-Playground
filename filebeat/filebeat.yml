@@ -17,19 +17,34 @@ filebeat.prospectors:
     id: ${LHR_ID}
     app_version: ${LHR_APP_VERSION}
 
+output:
+  logstash:
+    enabled: true
+    hosts:
+      # Local
+      # - 0.0.0.0:5044
+
+      # Local, ssl
+      - 0.0.0.0:12345
+
+      # Prod
+      - cloud.lefthandrobotics.com:12345
+    timeout: 15
+
+    # Used for client auth. Mapped in from docker-compose
+    ssl.certificate: "/etc/client.crt"
+    ssl.key: "/etc/client.key"
+
+    # Probably don't need this one for production
+    ssl.certificate_authorities: ["/etc/server.crt"]
+
+
 # output.elasticsearch:
 #   # Maybe we should use different indicies for each application type? Need to look at the performance consequences 
 #   index: 'testerbester'
 #   hosts: ["0.0.0.0:9200"]
 #   template.name: template
 #   template.path: template.template.json
-
-output:
-  logstash:
-    enabled: true
-    hosts:
-      - 0.0.0.0:5044
-    timeout: 15
 
 # output:
 #   logstash:
